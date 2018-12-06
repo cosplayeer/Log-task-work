@@ -1,0 +1,45 @@
+todo:
+1. ~/DYP/scripts/secret/climatebox下的：
+DownloadC3S2018.py
+修改。无法正确下载数据(官网暂时打不开) 
+
+参考IIIIIlukko和IIIIInspiration笔记
+
+2. 用加盐的方式修改密码
+
+3. MOS项目测试，对比结果。
+
+4. 用python写成一整套输出RMSE和平均值误差的脚本
+	参考论文：
+	Extensive Verification of Mesoscale and CFD-Model Downscaling
+	德国弗劳恩
+5. 完善简历
+
+6. 自动下载FNL & ERA 资料。(最不急，应为可能会有问题)
+
+7. 完善私人github仓库 windows上没有也不行啊。
+
+8. 书序vscode快捷键
+
+9. python项目
+
+10. jupyter windows安装
+
+11.同步软件：
+ 论坚果云和github备份的好坏。
+ 
+ git上对每个项目（工作日志项目，如本文）  重量级，较大文件，无流量限制，且不用再次用坚果云备份
+ windows上同步=>上传git文档
+ linux上同步=> 上传git代码
+ 
+ 
+ 坚果云上对每个项目
+ 工作windows上同步=>上传坚果云   <= windows笔记本下载同步结果[pw等小文件]
+ 工作linux上同步=>上传坚果云
+ 
+ 注意：不应在坚果云同步目录下建立或拷贝git仓库
+       在坚果云同步目录中不能做任何解压新建操作。不然都会备份。
+	   
+			git 客户端不能登录应该是XX-NET代理的问题。有时间换个新代理
+ 
+			github 大小估计在1G左右，不建议将各类软件上传GIThub
