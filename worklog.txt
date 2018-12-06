@@ -17,7 +17,7 @@ DownloadC3S2018.py
 
 6. 自动下载FNL & ERA 资料。(最不急，应为可能会有问题)
 
-7. 完善私人github仓库 windows上没有也不行啊。
+7. 完善私人github仓库 windows上没有也不行啊。[日志文件已完成]
 
 8. 书序vscode快捷键
 
