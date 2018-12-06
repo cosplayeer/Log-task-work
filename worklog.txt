@@ -6,6 +6,10 @@ DownloadC3S2018.py
 参考IIIIIlukko和IIIIInspiration笔记
 
 2. 用加盐的方式修改密码
+   已修改：
+		EC 
+		Copernicus
+           
 
 3. MOS项目测试，对比结果。
 
@@ -17,11 +21,12 @@ DownloadC3S2018.py
 
 6. 自动下载FNL & ERA 资料。(最不急，应为可能会有问题)
 
-7. 完善私人github仓库 windows上没有也不行啊。[日志文件已完成]
+7. 完善私人github仓库 windows上没有也不行啊。[worklog日志文件已完成]
 
-8. 书序vscode快捷键
+8. 熟悉vscode快捷键
 
 9. python项目
+		先从matlibplot开始，与4结合。
 
 10. jupyter windows安装
 
