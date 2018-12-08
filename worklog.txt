@@ -9,6 +9,7 @@ DownloadC3S2018.py
    已修改：
 		EC 
 		Copernicus
+		github
            
 
 3. MOS项目测试，对比结果。
