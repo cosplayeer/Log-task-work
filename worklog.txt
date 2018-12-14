@@ -18,7 +18,7 @@ DownloadC3S2018.py
 	参考论文：
 	Extensive Verification of Mesoscale and CFD-Model Downscaling
 	德国弗劳恩
-5. 完善简历
+
 
 6. 自动下载FNL & ERA 资料。(最不急，应为可能会有问题) 
 	ERAI 0.75度 9月底下载已完成，10月未下载
@@ -57,7 +57,28 @@ DownloadC3S2018.py
 	TODO:
 	python数据科学速查表打印：
 	http://bbs.06climate.com/forum.php?mod=viewthread&tid=88268
-	长江委简历
-	个人收入工资证明 找王工签字
+	个人收入工资证明 找王工签字（已完成）
+	
+PBS：
+    PBS中文介绍文档：http://www.doc88.com/p-9572756633663.html
+	PBS中文介绍文档: http://blog.sina.com.cn/s/blog_650463380100wjof.html
+	PBS英文介绍文档: https://jabriffa.wordpress.com/2015/02/11/installing-torquepbs-job-scheduler-on-ubuntu-14-04-lts/
+	
+
+TianRun项目的MOS 对比结果。
+资料下载着，包括气候资料和在分析资料。
+没有10月，11月份的。
+气候资料的分析。资料量比较大。
+PBS作业卡的安装
+
+ERA5 点数据提取
+测试提取2017年一整年的时间：30min
+./SCRIPTS/reanl/pchip1h.py core dumped
+./SCRIPTS/reanl/pchip10m.py core dumped
+已解决，不是bug，是python环境的问题。
+ERA5 下载 
+Climate
+海洋
+
 	
 	
