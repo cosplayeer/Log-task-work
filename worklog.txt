@@ -81,4 +81,93 @@ Climate
 海洋
 
 	
+MSPLicenceGenerator:
+/Public/DailyBuiding/
+
+MERRA2资料下载：
+    EARTHDATA 下载日志：
+    http://bbs.06climate.com/forum.php?mod=viewthread&tid=53929&highlight=merra
+    {
+	选第一个：merra数据中直接有2m,10m,50m的资料
+    U10M = 10-meter eastward wind
+    U2M = 2-meter eastward wind
+    U50M = eastward wind at 50 meters
+    V10M = 10-meter northward wind
+    V2M = 2-meter northward wind
+    V50M = northward wind at 50 meters
+	}
+    可以使用wget或curl进行下载。
+	[We recommend checking your ~/.netrc file to ensure it only has one line. ]
+     找出myfile.dat的规律：时间问题。
+
+（FNL和ERA,ERA5类的数据提取保持不变）
+	（王：修改FNL 和 EAR5之类的提取方式） 
+	    （goal 1: 高度提取
+		（goal 2: 速度提取（10年提取）==> 需要使用原始资料 <== 参考Merra数据的存取
+（增加2D变量和MERRA数据的提取）
+（增加气候月平均资料的提取）
+
+亮点一共有四点：
+	1. 气候 月平均：
+		图谱： ~/DYP/scripts/secret/climatebox
+		资料下载： ~/DYP/scripts/secret/climatedownload/0UpdateERAIClimatesfc.sh
+		资料命名：adaptor.mars.external-201710-6month.grib
+		readgrib2_forecast.ncl
+	2. merra 0.5 x 0.625
+		merra 画图位置在哪里
+		merra 画图+ 点数据提取= > 循环提取merra数据。（最长设限10年）
+								  http://www.wikience.org/news/time-series-for-nasa-merra-wind-speed-and-direction/
+				隐形修改：
+						FNL和ERA的改写。包括图谱的提取和点的提取都从原始数据开始。
+						图谱可以直接保存。就放在那里。
+	3. 海洋。Copernicus
+	    图谱： $gitshell/reanl/plotWave.ncl
+	4. 气候预报
+		图谱： ~/DYP/scripts/secret/climatebox
+		资料  ~/DYP/scripts/secret/climatedownload/data  
+					<1980-- 2017>年的资料 Feilds:Monthly Means of Daily Means
+		资料下载：  ~/DYP/scripts/secret/climatedownload/0UpdateERAIClimatesfc.sh
+		关键字：ECMWF阅读笔记 有道云笔记
+		下载： DownloadC3Stest.py	
 	
+	5. CERA-SAT, daily资料。有预报资料，有再分析资料。
+				 但时间只有Analysis 2008-2016的。所以不关心
+				 亮点：	<3小时间隔，包含10m风速和2m风速>
+					
+{关于下载应该有个文档整理}
+
+
+图：ventusky色标及color table修改：
+https://www.ventusky.com/?p=36;-6;1&l=wind-100m&m=gfs
+m/s   km/h
+42  90
+38  80
+34  70
+30  60
+26  50
+22  45
+18  40
+14  35
+12  30
+10  25
+8   20
+6   15
+4   10
+2   5
+0   0
+
+mysql相关（无用）
+service mysql status
+service mysql stop
+service mysql restart
+service /etc/init.d/mysql restart
+
+两部分工作：
+FNL 点提取 并行的改写
+ERAI 975hpa高度风速提取
+图谱的添加（非并行）及csv格式文件的保存。
+
+未添加至软件的脚本名字要记住：
+相对误差，绝对误差图谱
+路径+ 名字。
+
