@@ -24,7 +24,9 @@ DownloadC3S2018.py
 	ERAI 0.75度 9月底下载已完成，10月未下载
 	ERA5 0.3度  原始资料2018年1月到2018年8月，目前可以下载最新的07月和08月
 				中间资料2018年1月到2018年4月，需下载（5月，6月）7月，8月
-
+	
+	FNL:更新了一个数据下载的问题，官网下载位置更新，由data更新为datasets(WRONG)
+	SST:数据下载只到2015年以后的会比较齐全
 7. 完善私人github仓库 windows上没有也不行啊。[worklog日志文件已完成]
 
 8. 熟悉vscode快捷键
@@ -215,4 +217,163 @@ W 输出格式统一
 		对季节预报数据进行分析，并结合一年的实际观测进行分析比较，检验资料的可信度。后续整理成一篇文章摘要。
 		
 	
+目前工作：
+1.	资料原始格式的下载
+2.	资料载脚本
+3.	资料提取脚本
+4.	资料后处理（为张工和王忠水提供资料）
+5.	资料诊断变量的计算
 
+短期计划：
+1.	文章poster，做一个预报数据和实际观测的对比评分。（没有做过评分的预报数据是没有意义的）
+1.
+问题1: 网站预报资料下载不稳定，给出了通知 
+	2：
+长期计划：
+1. 
+2.
+
+水哥问题：
+1.远古license可以制成
+2.远古版本的license制造，使用时间应该允许小于当前时间
+
+WRF难点：
+1.风场参数模拟
+2.TKE计算需重新编译，编译好后还没有设置MYJ，参考有道云笔记。
+3.
+
+文章选点个例：
+ECMWFDATA
+观测vs季节预报vs再分析
+
+
+WT(MUPE)报告：
+自动报告：李工
+
+
+
+README.windturbine 主要内容
+需激活Fitch 方案
+它的不同之处在于提取的动能（KE）是基于
+涡轮机的推力系数（表示由于涡轮机从大气中提取的KE的总分数），
+而不是功率系数加上估计的损耗因子
+此外，产生的TKE是风速的函数。
+
+推力系数和功率曲线应该从涡轮机制造商处获得，用于感兴趣的涡轮机，
+并且如下所述结合到表格中。
+如果您无法访问这些数据，则此版本中提供了理想化的风力涡轮机参数
+参数化与MYNN PBL一起工作，并修改代表2xTKE的QKE字段以包括由风力涡轮机产生的TKE。
+
+QKE can be advected as a part of the scalar 4D tracer array in WRF
+QKE可以作为WRF中标量4D跟踪器阵列的一部分进行平流
+
+不建议以高于5转子直径的分辨率运行参数化 - 
+在此分辨率下应包括转子叶片的旋转（未在当前模型中表示）
+
+namelist.input修改：
+&physics
+bl_mynn_tkeadvect = .true.
+
+
+
+
+
+
+
+
+
+
+
+第一步：
+激活参数：
+set windfarm_opt to 1 in the physical part
+------------------------------------
+第二步：
+读入风机位置的文件
+windturbines.txt
+文件内容：
+lat, lon, turbine type
+33.3   133    1
+33.3   133    2
+---------------------------------
+第三步：
+读入风机参数的table文件
+wind-turbine-1.tbl
+wind-turbine-2.tbl
+...................................
+Height in meters of turbine hub
+Diameter in meters of the rotor
+Standing thrust coefficient
+Nominal power of turbine(MW)
+
+A    B   C   D
+轮毂高度， 转子直径， 站立推力系数, 涡轮机的标称功率
+例如：
+23
+80. 85. 0.1 2.0
+A   B   C   D
+3.   0.7   80.    风速， 推力系数(thrust coefficient)， 风能(power production)（单位：KW). 
+
+option 2:仿真模拟
+用ij值代替经纬度
+设置windfarm_ij = 1
+将会去找 windturbines-ij.txt文件
+
+I  J  Type
+example:
+10 10 1
+
+测试跑：
+新建项目及后处理目录： 
+WORKSPACE/wind_turbine/WRFV3/run
+编译源目录，不受其影响：
+Shell/WRFV3_turbine/run
+
+
+本周工作：
+对比结果
+完成文本图谱提取
+
+下周工作：
+fitch方案在WRF模式中的应用
+
+
+
+Seasonal forecast daily data:
+始发中心（Originating centre）与系统（System）的对应关系：
+ECMWF					5
+UK Met Office			13
+Meteo France			6
+DWD						2
+CMCC					3	
+
+再分析数据提取后台数据提供：
+MERRA2 :
+wind10m
+wind50m
+...
+FNL:
+...
+ERA-Interim:
+...
+ERA5:
+...
+
+sfile = addfile("sst.nc","r")
+    temp  = sfile->TEMP(0,0,:,:)
+
+    Opt                = True
+
+    Opt@SrcFileName    = "src_SCRIP.nc"
+    Opt@DstFileName    = "dst_SCRIP.nc"
+    Opt@WgtFileName    = "NCEP_2_Rect.nc"
+    Opt@ForceOverwrite = True
+
+    Opt@SrcGridMask    = where(.not.ismissing(temp),1,0)   ; use SrcMask2D in NCL V6.2.1 and earlier
+
+    Opt@DstGridType    = "5x5"
+    Opt@DstLLCorner    = (/ -60.d,   0.d/)
+    Opt@DstURCorner    = (/  60.d, 355.d/)
+
+    temp_regrid = ESMF_regrid(temp,Opt)
+    printVarSummary(temp_regrid)
